@@ -24,8 +24,7 @@ RUN pip install --no-cache-dir \
 
 COPY . /usr/src/app
 
-RUN cp docs/config.dist.xml docs/config.xml \
-    && (cd django/publicmapping && python setup.py ../../docs/config.xsd ../../docs/config.xml -v2 -d)
+RUN cat docs/config.dist.xml | sed -e 's|<Database name="YOUR-DATABASE-NAME" user="publicmapping" password="YOUR-DATABASE-PASSWORD" host="OPTIONAL"/>|<Database name="district_builder" user="district_builder" password="district_builder" host="postgres"/>|' > docs/config.xml
 
-ENTRYPOINT ["python"]
-CMD ["django/publicmapping/manage.py"]
+ENTRYPOINT ["bash"]
+CMD ["start.sh"]
