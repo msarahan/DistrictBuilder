@@ -4,6 +4,9 @@ postgres:
    - POSTGRES_USER=postgres
    - POSTGRES_PASSWORD=postgres
 
+geoserver:
+  image: thinkwhere/geoserver
+
 redis:
   image: redis:3-alpine
 
@@ -12,7 +15,8 @@ django:
   links:
     - postgres
     - redis
+    - geoserver
   ports:
     - 8080:8080
   command:
-    - /usr/src/app/start.sh
+    - /projects/PublicMapping/DistrictBuilder/start.sh
