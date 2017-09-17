@@ -1,9 +1,8 @@
 postgres:
-  image: quay.io/azavea/postgis:2.2-postgres9.5-slim
+  image: mdillon/postgis:9.6-alpine
   environment:
-    - POSTGRES_DB=district_builder
-    - POSTGRES_USER=district_builder
-    - POSTGRES_PASSWORD=district_builder
+   - POSTGRES_USER=postgres
+   - POSTGRES_PASSWORD=postgres
 
 redis:
   image: redis:3-alpine
@@ -15,6 +14,5 @@ django:
     - redis
   ports:
     - 8080:8080
-  # command:
-  #   - /usr/bin/python /usr/src/app/django/publicmapping/manage.py
-  #   - run_gunicorn
+  command:
+    - /usr/src/app/start.sh
